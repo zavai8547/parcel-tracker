@@ -57,6 +57,14 @@ function BookParcel() {
 
                     {/* Parcel Details */}
                     <h3>Parcel Info</h3>
+                    <h4>Parcel Sent from</h4>
+                    <select name="destination" onChange={handleChange} style={styles.input}>
+                        <option value="Nakuru">Nakuru</option>
+                        <option value="Nairobi">Nairobi</option>
+                        <option value="Mombasa">Mombasa</option>
+                        <option value="Kisumu">Kisumu</option>
+                    </select>
+                    <h4>Parcel Sent to</h4>
                     <select name="destination" onChange={handleChange} style={styles.input}>
                         <option value="Nakuru">Nakuru</option>
                         <option value="Nairobi">Nairobi</option>
@@ -64,9 +72,15 @@ function BookParcel() {
                         <option value="Kisumu">Kisumu</option>
                     </select>
 
-                    <textarea name="description" placeholder="Parcel Description (e.g., Box of Shoes)" onChange={handleChange} required style={styles.textarea} />
 
+                    <p>Enter the description of the parcel</p>
+
+
+                    <textarea name="description" placeholder="Parcel Description (e.g., Box of Shoes)" onChange={handleChange} required style={styles.textarea} />
+                    <h3>Payment Details</h3>
                     <input name="amount" type="number" placeholder="Amount Paid (KES)" onChange={handleChange} required style={styles.input} />
+                    <h3>Parcel additional details</h3>
+                    <input name="additionalDetails" placeholder="Additional Details" onChange={handleChange} required style={styles.input} />
 
                     <button type="submit" style={styles.button}>Book & Generate Receipt</button>
                 </form>

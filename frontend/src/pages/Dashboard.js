@@ -20,6 +20,8 @@ function Dashboard() {
             {/* Header Section */}
             <header style={styles.header}>
                 <h2>🚚 Samper Cabs Tracker</h2>
+                <h2>Parcel Tracker</h2>
+                <h2>Parcel Tracker</h2>
                 <button onClick={handleLogout} style={styles.logoutBtn}>Logout</button>
             </header>
 
@@ -35,7 +37,7 @@ function Dashboard() {
                     + New Parcel Booking
                 </button>
 
-                <p>Enter a tracking ID to find your package.</p>
+                <p>Enter a tracking ID to find a package.</p>
 
                 {/* Tracking Search Bar */}
                 <form onSubmit={handleTrack} style={styles.searchBox}>
