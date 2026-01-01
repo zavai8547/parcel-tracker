@@ -6,8 +6,8 @@ function Dashboard() {
     const [trackingId, setTrackingId] = useState('');
 
     const handleLogout = () => {
-        // Later we will clear user tokens here
-        navigate('/'); // Go back to Home
+
+        navigate('/');
     };
 
     const handleTrack = (e) => {
@@ -27,7 +27,7 @@ function Dashboard() {
             <div style={styles.content}>
                 <h3>Welcome back!</h3>
 
-                {/* NEW: Button to go to the Booking Page */}
+                {/* go to the Booking Page */}
                 <button
                     onClick={() => navigate('/book-parcel')}
                     style={styles.bookBtn}
@@ -49,7 +49,7 @@ function Dashboard() {
                     <button type="submit" style={styles.trackBtn}>Track Parcel</button>
                 </form>
 
-                {/* Mock Data for Recent Parcels */}
+                {/* Data for Recent Parcels */}
                 <div style={styles.recentSection}>
                     <h4>Recent Shipments</h4>
                     <div style={styles.card}>📦 <b>SAM-8859</b> - <span style={{ color: 'orange' }}>In Transit</span></div>
@@ -60,14 +60,13 @@ function Dashboard() {
     );
 }
 
-// Simple styles to make it look like a real app
+
 const styles = {
     container: { fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f6f8', minHeight: '100vh' },
     header: { display: 'flex', justifyContent: 'space-between', padding: '1rem 2rem', backgroundColor: '#282c34', color: 'white', alignItems: 'center' },
     logoutBtn: { padding: '8px 16px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' },
     content: { maxWidth: '600px', margin: '2rem auto', padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' },
 
-    // NEW Style for the booking button
     bookBtn: { width: '100%', padding: '12px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', marginBottom: '20px' },
 
     searchBox: { display: 'flex', gap: '10px', marginTop: '1rem', marginBottom: '2rem' },

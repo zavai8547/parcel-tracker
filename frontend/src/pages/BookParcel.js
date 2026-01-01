@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 function BookParcel() {
     const navigate = useNavigate();
 
-    // State for the form
+
     const [formData, setFormData] = useState({
         senderName: '',
         senderPhone: '',
         receiverName: '',
         receiverPhone: '',
-        destination: 'Nakuru', // Default
+        destination: 'Nairobi',
         description: '',
         amount: '',
     });
@@ -22,17 +22,16 @@ function BookParcel() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // 1. Generate a random Tracking ID (e.g., SAM-8842)
+
         const trackingId = 'SAM-' + Math.floor(1000 + Math.random() * 9000);
 
-        // 2. Mock saving to DB (We will connect Laravel later)
         const newParcel = { ...formData, trackingId, status: 'In Transit', date: new Date().toLocaleDateString() };
         console.log("Parcel Booked:", newParcel);
 
-        // 3. Alert and eventually print receipt
+
         alert(`Parcel Booked Successfully!\nTracking ID: ${trackingId}\n\n(Receipt printing will open next)`);
 
-        // 4. Redirect back to Dashboard or stay to print
+
         navigate('/dashboard');
     };
 
