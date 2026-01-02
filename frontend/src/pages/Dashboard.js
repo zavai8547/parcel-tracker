@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import DashboardLayout from '../components/DashboardLayout';
 
 function Dashboard() {
-    const navigate = useNavigate();
     const [trackingId, setTrackingId] = useState('');
-
-    const handleLogout = () => {
-
-        navigate('/');
-    };
 
     const handleTrack = (e) => {
         e.preventDefault();
@@ -16,66 +10,50 @@ function Dashboard() {
     };
 
     return (
-        <div style={styles.container}>
-            {/* Header Section */}
-            <header style={styles.header}>
-                <h2>🚚 Samper Cabs Tracker</h2>
-                <h2>Parcel Tracker</h2>
-                <h2>Parcel Tracker</h2>
-                <button onClick={handleLogout} style={styles.logoutBtn}>Logout</button>
-            </header>
+        <DashboardLayout> {/* wrap to layout */}
 
-            {/* Main Content */}
-            <div style={styles.content}>
-                <h3>Welcome back!</h3>
+            <h2>👋 Welcome Back, Attendant!</h2>
+            <p>Here is the overview of recent activities.</p>
 
-                {/* go to the Booking Page */}
-                <button
-                    onClick={() => navigate('/book-parcel')}
-                    style={styles.bookBtn}
-                >
-                    + New Parcel Booking
-                </button>
+            {/* Stats Cards */}
+            <div style={styles.statsGrid}>
+                <div style={{ ...styles.statCard, backgroundColor: '#e3f2fd' }}>
+                    <h3>📦 12</h3> <p>Parcels Today</p>
+                </div>
+                <div style={{ ...styles.statCard, backgroundColor: '#e8f5e9' }}>
+                    <h3>🚚 5</h3> <p>In Transit</p>
+                </div>
+                <div style={{ ...styles.statCard, backgroundColor: '#fff3e0' }}>
+                    <h3>📍 8</h3> <p>Arrived</p>
+                </div>
+            </div>
 
-                <p>Enter a tracking ID to find a package.</p>
-
-                {/* Tracking Search Bar */}
+            {/* Tracking Section */}
+            <div style={styles.section}>
+                <h3>Quick Track</h3>
                 <form onSubmit={handleTrack} style={styles.searchBox}>
                     <input
                         type="text"
-                        placeholder="Enter Tracking ID (e.g., SAM-123)"
+                        placeholder="Enter Tracking ID..."
                         value={trackingId}
                         onChange={(e) => setTrackingId(e.target.value)}
                         style={styles.input}
                     />
-                    <button type="submit" style={styles.trackBtn}>Track Parcel</button>
+                    <button type="submit" style={styles.trackBtn}>Track</button>
                 </form>
-
-                {/* Data for Recent Parcels */}
-                <div style={styles.recentSection}>
-                    <h4>Recent Shipments</h4>
-                    <div style={styles.card}>📦 <b>SAM-8859</b> - <span style={{ color: 'orange' }}>In Transit</span></div>
-                    <div style={styles.card}>📦 <b>SAM-1124</b> - <span style={{ color: 'green' }}>Delivered</span></div>
-                </div>
             </div>
-        </div>
+
+        </DashboardLayout>
     );
 }
 
-
 const styles = {
-    container: { fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f6f8', minHeight: '100vh' },
-    header: { display: 'flex', justifyContent: 'space-between', padding: '1rem 2rem', backgroundColor: '#282c34', color: 'white', alignItems: 'center' },
-    logoutBtn: { padding: '8px 16px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' },
-    content: { maxWidth: '600px', margin: '2rem auto', padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' },
-
-    bookBtn: { width: '100%', padding: '12px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', marginBottom: '20px' },
-
-    searchBox: { display: 'flex', gap: '10px', marginTop: '1rem', marginBottom: '2rem' },
-    input: { flex: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '16px' },
-    trackBtn: { padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px' },
-    recentSection: { marginTop: '20px', borderTop: '1px solid #eee', paddingTop: '20px' },
-    card: { padding: '10px', border: '1px solid #eee', marginBottom: '10px', borderRadius: '4px', backgroundColor: '#fafafa' }
+    statsGrid: { display: 'flex', gap: '20px', marginBottom: '30px' },
+    statCard: { flex: 1, padding: '20px', borderRadius: '8px', textAlign: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' },
+    section: { backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' },
+    searchBox: { display: 'flex', gap: '10px', marginTop: '15px' },
+    input: { flex: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ddd' },
+    trackBtn: { padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }
 };
 
 export default Dashboard;
