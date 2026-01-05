@@ -1,19 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
 
 function Dashboard() {
     const [trackingId, setTrackingId] = useState('');
+    const [userName, setUserName] = useState('User');
+
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            setUserName(user.name);
+        }
+
+        const timerId = setInterval(() => {
+            setCurrentDate(new Date());
+        }, 1000);
+
+
+        return () => clearInterval(timerId);
+    }, []);
 
     const handleTrack = (e) => {
         e.preventDefault();
         alert(`Tracking functionality for ID: ${trackingId} coming soon!`);
     };
 
-    return (
-        <DashboardLayout> {/* wrap to layout */}
 
-            <h2>👋 Welcome Back, Attendant!</h2>
-            <p>Here is the overview of recent activities.</p>
+    const formatDate = (date) => {
+        return date.toLocaleDateString('en-GB', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    };
+
+    const formatTime = (date) => {
+        return date.toLocaleTimeString('en-GB', { hour12: false }); // 24-hour format
+    };
+
+    return (
+        <DashboardLayout>
+
+            {/* HEADER SECTION WITH CLOCK */}
+            <div style={styles.headerRow}>
+                <div>
+                    <h2 style={{ margin: 0 }}>👋 Welcome Back, {userName}!</h2>
+                    <p style={{ color: '#666', marginTop: '5px' }}>Here is the overview of recent activities.</p>
+                </div>
+
+                {/* 3. THE CLOCK UI */}
+                <div style={styles.clockCard}>
+                    <div style={styles.timeText}>{formatTime(currentDate)}</div>
+                    <div style={styles.dateText}>{formatDate(currentDate)}</div>
+                </div>
+            </div>
 
             {/* Stats Cards */}
             <div style={styles.statsGrid}>
@@ -48,6 +91,38 @@ function Dashboard() {
 }
 
 const styles = {
+
+    headerRow: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '30px',
+        flexWrap: 'wrap',
+        gap: '20px'
+    },
+    // Clock Styles
+    clockCard: {
+        backgroundColor: '#282c34',
+        color: 'white',
+        padding: '15px 25px',
+        borderRadius: '12px',
+        textAlign: 'center',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
+        minWidth: '200px',
+    },
+    timeText: {
+        fontSize: '28px',
+        fontWeight: 'bold',
+        letterSpacing: '2px',
+        fontFamily: 'monospace',
+        color: '#4caf50',
+    },
+    dateText: {
+        fontSize: '14px',
+        opacity: '0.8',
+        marginTop: '5px',
+    },
+
     statsGrid: { display: 'flex', gap: '20px', marginBottom: '30px' },
     statCard: { flex: 1, padding: '20px', borderRadius: '8px', textAlign: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' },
     section: { backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' },

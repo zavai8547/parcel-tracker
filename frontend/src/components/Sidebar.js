@@ -6,29 +6,29 @@ function Sidebar() {
 
     return (
         <div style={styles.sidebar}>
-            <h3 style={styles.logo}>📦 Samper Cabs</h3>
+            <h3 style={styles.logo}> Samper Cabs Limited</h3>
 
             <nav style={styles.nav}>
                 <Link
                     to="/dashboard"
                     style={location.pathname === '/dashboard' ? styles.activeLink : styles.link}
                 >
-                    📊 Dashboard
+                    Dashboard
                 </Link>
 
                 <Link
                     to="/book-parcel"
                     style={location.pathname === '/book-parcel' ? styles.activeLink : styles.link}
                 >
-                    📝 Book Parcel
+                    Book Parcel
                 </Link>
 
                 {/* Placeholder for all links */}
-                <Link to="/profile" style={styles.link}>👤 Profile</Link>
+                <Link to="/profile" style={styles.link}> Profile</Link>
             </nav>
 
             <div style={styles.footer}>
-                <Link to="/" style={styles.logout}>🚪 Logout</Link>
+                <Link to="/" style={styles.logout}> Logout</Link>
             </div>
         </div>
     );
